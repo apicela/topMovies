@@ -4,6 +4,7 @@
 :root{
     --primary-color: rgb(26, 26, 26);
     --second-color: rgb(19, 18, 18);
+    --overview-color: rgba(19,18,18,0.6);
 }
 
 ::placeholder{
@@ -47,6 +48,8 @@ margin:10px;
 border-radius: 3px;
 background-color: var(--second-color);
 box-shadow: 0px 0.1px 2px    rgb(70, 69, 69);
+position:relative;
+overflow: hidden;
 }
 
 .movie img{
@@ -71,4 +74,26 @@ width:100%;
     font-size:20px;
     background-color: var(--primary-color);
     color:white;
+}
+
+.overview{
+    position: absolute;
+    padding: 15px;
+    font-size: 23px;
+    left:0;
+    right:0;
+    bottom: 60px;
+    background-color: var(--overview-color); 
+    transform: translateY(110%);
+    max-height: 100%;
+    transition: transform 0.4s ease-in;
+}
+
+.overview h2{
+    color:rgb(43, 255, 0);
+    text-align: center;
+}
+
+.movie:hover .overview{
+    transform: translateY(0%);
 }
