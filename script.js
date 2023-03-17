@@ -1,7 +1,7 @@
 const API_KEY = "api_key=4afe9ae58f077a64af133da919425eca";
 const BASE_URL = "https://api.themoviedb.org/3/";
 const LANGUAGE = "&language=pt-BR";
-const API_POPULAR = BASE_URL + '/discover/movie?sort_by=popularity.desc&' + API_KEY + LANGUAGE;
+const API_POPULAR = BASE_URL + 'movie/popular?&' + API_KEY + LANGUAGE + "&page=1";
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 const searchBar = document.getElementById('form');
 const search = document.getElementById('pesquisa');
@@ -9,6 +9,12 @@ const SEARCH_URL = BASE_URL + 'search/movie?' + API_KEY;
 const main = document.getElementById('main');
 
 getMovies(API_POPULAR);
+
+var countryBox = document.getElementById("selectCountry")
+.onchange = change => {
+    var country = document.getElementById("selectCountry").value;
+    getMovies(API_POPULAR + "&region="+ country);}
+
 
 function getMovies(url){
     
@@ -46,6 +52,7 @@ function getColor(vote){
     else if(vote>=5){return 'orange';}
     else {return 'red';}
 }
+
 
 searchBar.addEventListener('submit',(e) => {
     e.preventDefault();

@@ -8,15 +8,34 @@
     <title>TOP Filmes</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css"
+/>
 <body>
   
 
         <header>
-            <form class="form" id="form">
-                <input type="text" class="pesquisa" id = "pesquisa" 
-                placeholder ="Buscar filme">
-            </form>
-        </header>
+
+            <select id = "selectCountry">
+                <option value="" selected>🌎</option>
+                <option  value="BR">🇧🇷</option>
+                <option value="US">🇺🇸</option>
+                <option value="DE">🇩🇪</option>
+                <option value="FR">🇫🇷</option>
+                <option value="AR">🇦🇷</option>
+                <option value="ES">🇪🇸</option>
+                <option value="IT">🇮🇹</option>
+                <option value="CN">🇨🇳</option>
+                <option value="RU">🇷🇺</option>
+                <option value="CA">🇨🇦</option>
+         </select>
+
+         <form class="form" id="form">
+            <input type="text" class="pesquisa" id = "pesquisa" 
+            placeholder ="Buscar filme">
+        </form>
+    </header>
 
     <div id="main">
 
@@ -73,6 +92,9 @@
 
    
     
+    
     <script src="script.js"></script>
+
 </body>
+
 </html>
