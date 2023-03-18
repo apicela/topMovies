@@ -11,7 +11,8 @@ const main = document.getElementById('main');
 var watchFilmes = document.getElementById('filmes');
 var watchSeries = document.getElementById('series');
 var filme = true;
-console.log(BASE_URL + 'movie/popular?&' + API_KEY + LANGUAGE + "&page=1");
+console.log(API_POPULAR_MOVIES);
+console.log(API_POPULAR_SERIES)
 getMovies(API_POPULAR_MOVIES);
 
 var countryBox = document.getElementById("selectCountry")
@@ -33,7 +34,8 @@ function getMovies(url){
 function showMovies(data){
     main.innerHTML = "";
     data.forEach(movie => {
-    const{title,poster_path,vote_average,overview} = movie;
+    
+    const{title,name,poster_path,vote_average,overview} = movie;
     const movieElement = document.createElement('div');
     movieElement.classList.add('movie');
     movieElement.innerHTML =  `
@@ -49,7 +51,19 @@ function showMovies(data){
                 ${overview}
             </div>
 
-    `
+    `  
+       if(!filme){movieElement.innerHTML = `   
+        <img src="${IMG_URL+poster_path}">
+        
+       <div class="movieInfo">
+           <h2 class="titleMovie">${name}</h2>
+           <span class="${getColor(vote_average)}">${vote_average}</span>
+       </div>
+
+       <div class="overview">
+           <h2>RESUMO </h2>
+           ${overview}
+       </div> ` }
     main.appendChild(movieElement);
     })
 }
