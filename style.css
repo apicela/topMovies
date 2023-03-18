@@ -69,7 +69,7 @@ header .pesquisa{
     margin-left: 40px;
     margin-top:15px;
     align-content: center;
-    background-color: var(--second-color);
+    background-color: transparent;
     color:white;
     font-size: 20px;
     border: 1.3px solid var(--primary-color);

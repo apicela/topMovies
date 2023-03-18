@@ -15,17 +15,38 @@
             header{
         width: 100%;
         display: block;
+        padding: 0px;
+        margin: 0px;
         
+                }
+                .watchFont{
+                    padding: 5px;
+                    margin: 0px;
                 }
                 .topMovies{
                  margin-top:20%;
+                 font-size: 20px;
+                 margin-bottom: -10px;
                 }
                 .leftOptions{
                     margin-bottom: -60px;
+                    font-size: 10px;
+                    align-items: center;
+                    justify-content: space-around;
                 }
-               header .form{
+               header .pesquisa{
                     display:flex;
-                    margin-top:-16%;
+                    font-size: 14px;
+                }
+                .media{
+                    display:flex;
+                }
+                #selectCountry{
+                    margin-left: 0px;
+                }
+                .form{
+                    margin-top:-30px;
+                    margin-bottom: -10px;
                 }
             }
           </style>
@@ -49,11 +70,12 @@
                 <option value="RU">🇷🇺</option>
                 <option value="CA">🇨🇦</option>
          </select>
-
+<div class="media">
          <div class="watch">
             <h1 class="watchFont">FILMES</h1>
             <h1 class="watchFont">SERIES</h1>
         </div> 
+    </div>
     </div>
     
     <h1 class="topMovies"><span style="color:var(--blue-color);">Top</span><span style=" color: white;">Movies</span></h1>
