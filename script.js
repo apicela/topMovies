@@ -64,4 +64,6 @@ searchBar.addEventListener('submit',(e) => {
         getMovies(API_POPULAR);
     }
 })
+
+
 //
