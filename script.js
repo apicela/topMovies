@@ -1,19 +1,26 @@
 const API_KEY = "api_key=4afe9ae58f077a64af133da919425eca";
 const BASE_URL = "https://api.themoviedb.org/3/";
 const LANGUAGE = "&language=pt-BR";
-const API_POPULAR = BASE_URL + 'movie/popular?&' + API_KEY + LANGUAGE + "&page=1";
+const API_POPULAR_MOVIES = BASE_URL + 'movie/popular?&' + API_KEY + LANGUAGE + "&page=1" + "&vote_count.gte=100";
+const API_POPULAR_SERIES = BASE_URL + 'tv/popular?&' + API_KEY + LANGUAGE + "&page=1" + "&vote_count.gte=100";
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 const searchBar = document.getElementById('form');
 const search = document.getElementById('pesquisa');
-const SEARCH_URL = BASE_URL + 'search/movie?' + API_KEY; 
+const SEARCH_URL = BASE_URL + 'search/multi?' + API_KEY; 
 const main = document.getElementById('main');
-
-getMovies(API_POPULAR);
+var watchFilmes = document.getElementById('filmes');
+var watchSeries = document.getElementById('series');
+var filme = true;
+console.log(BASE_URL + 'movie/popular?&' + API_KEY + LANGUAGE + "&page=1");
+getMovies(API_POPULAR_MOVIES);
 
 var countryBox = document.getElementById("selectCountry")
 .onchange = change => {
     var country = document.getElementById("selectCountry").value;
-    getMovies(API_POPULAR + "&region="+ country);}
+    if(filme){
+    getMovies(API_POPULAR_MOVIES+ "&region="+ country);}
+        else{getMovies(API_POPULAR_SERIES+ "&region="+ country);}
+}
 
 
 function getMovies(url){
@@ -65,5 +72,18 @@ searchBar.addEventListener('submit',(e) => {
     }
 })
 
+watchFilmes.addEventListener('click',(e)=> {
+    filme = true;
+var country = document.getElementById("selectCountry").value;
+    getMovies(API_POPULAR_MOVIES + "&region="+ country);}
 
+)
+
+watchSeries.addEventListener('click',(e)=> {
+    var country = document.getElementById("selectCountry").value;
+    filme = false;
+    getMovies(API_POPULAR_SERIES + "&region="+ country);
+    console.log(API_POPULAR_SERIES + "&region="+ country)}
+    
+    )
 //
