@@ -13,19 +13,6 @@
     text-indent: 18px;
 }
 
-
-    .watchFont{
-        font-style: bold;
-         border-radius:15px;
-         margin: 13px;
-         padding: 3px 11px; 
-         color:rgb(255, 37, 21);
-         border: solid 0.1px  ;
-         background-color: var(--primary-color);
-     }
-    
-
-
 body{
     background-color: var(--primary-color);
     font-family: 'Candara';
@@ -42,9 +29,8 @@ header{
 }
 
 .topMovies{
-
 margin-top: 10px;
-
+margin-left: -170px;
 }
 
 header .pesquisa{
@@ -95,17 +81,14 @@ header .pesquisa{
 
 .watchFont{
    font-style: bold;
-    border-radius:15px;
-    margin: 13px;
-    padding: 3px 11px; 
-    color:rgb(152, 198, 241);
-    border: solid 0.1px  ;
-    background-color: var(--primary-color);
+
+    padding: 0px 13px; 
+    color:white;
 }
 
 .watchFont:hover{
-    background-color: var(--blue-color);
-    color:rgb(2, 2, 2);
+    
+    color:var(--blue-color);
 }
 #main{
     display: flex;

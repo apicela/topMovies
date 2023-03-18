@@ -3,6 +3,7 @@ const BASE_URL = "https://api.themoviedb.org/3/";
 const LANGUAGE = "&language=pt-BR";
 const API_POPULAR_MOVIES = BASE_URL + 'movie/popular?&' + API_KEY + LANGUAGE + "&page=1" + "&vote_count.gte=100";
 const API_POPULAR_SERIES = BASE_URL + 'tv/popular?&' + API_KEY + LANGUAGE + "&page=1" + "&vote_count.gte=100";
+const API_DISCOVER_MOVIES = BASE_URL + "discover/movie?"+ API_KEY+ LANGUAGE+"&sort_by=release_date.desc" + "&vote_count.gte=100"; 
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 const searchBar = document.getElementById('form');
 const search = document.getElementById('pesquisa');
@@ -10,7 +11,10 @@ const SEARCH_URL = BASE_URL + 'search/multi?' + API_KEY;
 const main = document.getElementById('main');
 var watchFilmes = document.getElementById('filmes');
 var watchSeries = document.getElementById('series');
+var discoverMovies = document.getElementById('releases');
 var filme = true;
+
+
 console.log(API_POPULAR_MOVIES);
 console.log(API_POPULAR_SERIES)
 getMovies(API_POPULAR_MOVIES);
@@ -100,4 +104,9 @@ watchSeries.addEventListener('click',(e)=> {
     console.log(API_POPULAR_SERIES + "&region="+ country)}
     
     )
-//
+
+    discoverMovies.addEventListener('click',(e)=> {
+        var country = document.getElementById("selectCountry").value;
+        filme = true;
+        getMovies(API_DISCOVER_MOVIES + "&region="+ country);        
+    }) 
