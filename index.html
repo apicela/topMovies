@@ -31,7 +31,6 @@
                     align-items: center;
                 }
                header .pesquisa{
-                
                     display:flex;
                     font-size: 14px;
                 }
@@ -43,7 +42,7 @@
                     margin-left: 0px;
                 }
                 .form{
-                    margin-top:-30px;
+                    margin-top:30px;
                     padding: 20px 7px;
                     margin-bottom: -10px;
                 }
@@ -59,6 +58,24 @@
     <header>
         
         <div class="leftOptions">
+         
+        <div class="media">
+        <div class="watch">
+            <h1 id ="filmes" >FILMES</h1>
+            <h1 id = "series" >SERIES</h1>
+            <h1 id = "releases" >NOVIDADES</h1>
+        </div> 
+    </div>
+    </div>
+    
+   <!-- <h1 class="topMovies"><span style="color:var(--blue-color);">Top</span><span style=" color: white;">Movies</span></h1> -->
+         <form class="form" id="form">
+            <input type="text" class="pesquisa" id = "pesquisa" 
+            placeholder ="Buscar filmes,series,etc.">
+        </form>
+    </header>
+
+        <div class="filter">
             <select id = "selectCountry">
                 <option value="" selected>🌎</option>
                 <option  value="BR">🇧🇷</option>
@@ -72,71 +89,33 @@
                 <option value="RU">🇷🇺</option>
                 <option value="CA">🇨🇦</option>
          </select>
-        <div class="media">
-           <div class="watch">
-            <h1 id ="filmes" class="watchFont">FILMES</h1>
-            <h1 id = "series" class="watchFont">SERIES</h1>
-            <h1 id = "releases" class="watchFont">NOVIDADES</h1>
-        </div> 
-    </div>
-    </div>
-    
-   <!-- <h1 class="topMovies"><span style="color:var(--blue-color);">Top</span><span style=" color: white;">Movies</span></h1> -->
-         <form class="form" id="form">
-            <input type="text" class="pesquisa" id = "pesquisa" 
-            placeholder ="Buscar filmes,series,etc.">
-        </form>
-    </header>
+         <div class="orderDiv">
+            <select id = "orderBy">
+                <option value="" selected>Ordenar por</option>
+                <option>Popularidade(maior)</option>
+                <option>Avaliação(melhor)</option>
+            </select>  
+        </div>
+            <select id = "provider">
+                <option value="" selected>Assistir na</option>
+                <option>Qualquer</option>
+                <option>Netflix</option>
+                <option>Amazon Prime</option>
+                <option>Disney+</option>
+                <option>Star+</option>
+                <option>HBO Max</option>
+            </select>  
 
+            <div class="generDiv">
+                <select id = "generSelector">
+                        <option value="" selected>Gênero</option>
+                        <option>Todos</option>
+                </select>  
+                </div>
+        </div>
+ 
     <div id="main">
 
-        <div class="movie">
-            <img src="https://e0.pxfuel.com/wallpapers/213/827/desktop-wallpaper-theater-aesthetic-movie-theatre.jpg">
-        
-            <div class="movieInfo">
-                <h2 class="titleMovie">Titulo</h2>
-                <span class="rating">6.9</span>
-            </div>
-
-            <div class="overview">
-                <h2>RESUMO </h2>
-                Lorem, ipsum dolor sit amet consectetur 
-                adipisicing elit. Magni, omnis totam libero 
-                repellat non facilis tempore aspernatur impedit obcaecati est quod tempora? Sit facere corporis consectetur, mollitia alias ad dolore.
-            </div>
-        </div>
-
-        <div class="movie">
-            <img src="https://e0.pxfuel.com/wallpapers/213/827/desktop-wallpaper-theater-aesthetic-movie-theatre.jpg">
-        
-            <div class="movieInfo">
-                <h2 class="titleMovie">Titulo</h2>
-                <span class="rating">6.9</span>
-            </div>
-
-            <div class="overview">
-                <h2>RESUMO </h2>
-                Lorem, ipsum dolor sit amet consectetur 
-                adipisicing elit. Magni, omnis totam libero 
-                repellat non facilis tempore aspernatur impedit obcaecati est quod tempora? Sit facere corporis consectetur, mollitia alias ad dolore.
-            </div>
-        </div>
-
-        <div class="movie">
-            <img src="https://e0.pxfuel.com/wallpapers/213/827/desktop-wallpaper-theater-aesthetic-movie-theatre.jpg" alt="image">
-        
-            <div class="movieInfo">
-                <h2 class="titleMovie">Titulo</h2>
-                <span class="rating">6.9</span>
-            </div>
-
-            <div class="overview">
-                <h2>RESUMO </h2>
-                Lorem, ipsum dolor sit amet consectetur 
-                adipisicing elit. Magni, omnis totam libero 
-                repellat non facilis tempore aspernatur impedit obcaecati est quod tempora? Sit facere corporis consectetur, mollitia alias ad dolore.
-            </div>
-        </div>
     </div>
 
 

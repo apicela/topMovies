@@ -6,6 +6,7 @@
     --second-color: rgb(19, 18, 18);
     --overview-color: rgba(19,18,18,0.85);
     --blue-color:rgb(152, 198, 241);
+    --dourado: rgb(253, 212, 90);
 }
 
 ::placeholder{
@@ -49,18 +50,23 @@ header .pesquisa{
     justify-content: flex-end;
 }
 
-
-#selectCountry {
-    max-height: 35px;
-    margin-left: 40px;
-    margin-top:15px;
-    align-content: center;
-    background-color: transparent;
-    color:white;
-    font-size: 20px;
-    border: 1.3px solid var(--primary-color);
-    margin-right: 25px;
+.filter{
+    display: flex;
+    justify-content: center;
+    margin: 15px;
 }
+
+.filter select {
+    align-items: center;
+    padding: 3px 10px;
+    background-color: rgb(253, 212, 90);
+    color:black;
+    font-size: 20px;
+    border: 1.3px solid var(--second-color);
+    border-radius: 20px;
+    margin-right: 25px;
+} 
+
 
 .leftOptions{
     display: flex;
@@ -79,17 +85,18 @@ header .pesquisa{
     margin: -8px ;
 }
 
-.watchFont{
+.watch h1{
    font-style: bold;
 
     padding: 0px 13px; 
     color:white;
 }
 
-.watchFont:hover{
-    
-    color:var(--blue-color);
+.watch h1:hover{
+    color:rgb(253, 212, 90);
 }
+
+
 #main{
     display: flex;
     flex-wrap: wrap;
@@ -163,4 +170,10 @@ width:100%;
 
 .orange {
     color:rgb(243, 187, 5);
+}
+
+.watch .dourado {
+    color: var(--dourado);
+    background-color: rgba(32, 32, 32, 0.897);
+    border-radius: 100px;
 }

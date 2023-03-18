@@ -5,34 +5,56 @@ const API_POPULAR_MOVIES = BASE_URL + 'movie/popular?&' + API_KEY + LANGUAGE + "
 const API_POPULAR_SERIES = BASE_URL + 'tv/popular?&' + API_KEY + LANGUAGE + "&page=1" + "&vote_count.gte=100";
 const API_DISCOVER_MOVIES = BASE_URL + "discover/movie?"+ API_KEY+ LANGUAGE+"&sort_by=release_date.desc" + "&vote_count.gte=100"; 
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
+var type="";
 const searchBar = document.getElementById('form');
 const search = document.getElementById('pesquisa');
 const SEARCH_URL = BASE_URL + 'search/multi?' + API_KEY; 
+const GENRE_LIST = BASE_URL + "genre/movie/list?"+ API_KEY + LANGUAGE;
 const main = document.getElementById('main');
-var watchFilmes = document.getElementById('filmes');
-var watchSeries = document.getElementById('series');
-var discoverMovies = document.getElementById('releases');
-var filme = true;
-
+const watchFilmes = document.getElementById('filmes');
+const watchSeries = document.getElementById('series');
+const discoverMovies = document.getElementById('releases');
+const genreSelector = document.getElementById('generSelector');
 
 console.log(API_POPULAR_MOVIES);
-console.log(API_POPULAR_SERIES)
+console.log(GENRE_LIST);
 getMovies(API_POPULAR_MOVIES);
+
+getList(GENRE_LIST);
 
 var countryBox = document.getElementById("selectCountry")
 .onchange = change => {
     var country = document.getElementById("selectCountry").value;
-    if(filme){
+
     getMovies(API_POPULAR_MOVIES+ "&region="+ country);}
-        else{getMovies(API_POPULAR_SERIES+ "&region="+ country);}
-}
+       /* else{getMovies(API_POPULAR_SERIES+ "&region="+ country);} 
+}*/
 
 
-function getMovies(url){
-    
+function getMovies(url){ 
     fetch(url).then(res => res.json()).then(data => 
         {   console.log(data.results);
             showMovies(data.results); } )
+}
+
+function getList(url){
+    fetch(url).then(res => res.json()).then(data =>
+        { genreList(data.genres);})
+}
+
+function genreList(data){
+    genreSelector.innerHTML = `
+     <option value="" selected>Gênero</option>
+     <option>Todos</option>  `
+    data.forEach(genre => {
+        
+        const{name} = genre;
+        const divGenre =  document.createElement('option');
+        divGenre.innerHTML = `
+        ${name}
+        `
+        genreSelector.appendChild(divGenre);
+    })
 }
 
 function showMovies(data){
@@ -46,7 +68,7 @@ function showMovies(data){
     <img src="${IMG_URL+poster_path}">
         
             <div class="movieInfo">
-                <h2 class="titleMovie">${title}</h2>
+                <h2 class="titleMovie">${title||name}</h2>
                 <span class="${getColor(vote_average)}">${vote_average}</span>
             </div>
 
@@ -56,18 +78,6 @@ function showMovies(data){
             </div>
 
     `  
-       if(!filme){movieElement.innerHTML = `   
-        <img src="${IMG_URL+poster_path}">
-        
-       <div class="movieInfo">
-           <h2 class="titleMovie">${name}</h2>
-           <span class="${getColor(vote_average)}">${vote_average}</span>
-       </div>
-
-       <div class="overview">
-           <h2>RESUMO </h2>
-           ${overview}
-       </div> ` }
     main.appendChild(movieElement);
     })
 }
@@ -86,27 +96,38 @@ searchBar.addEventListener('submit',(e) => {
     if(keyword){
         getMovies(SEARCH_URL + '&query=' + keyword + LANGUAGE);
     } else {
-        getMovies(API_POPULAR);
+        getMovies(API_POPULAR_MOVIES);
     }
 })
 
+
 watchFilmes.addEventListener('click',(e)=> {
-    filme = true;
+    watchFilmes.classList.add("dourado");
+    discoverMovies.classList.remove("dourado");
+    watchSeries.classList.remove("dourado");
 var country = document.getElementById("selectCountry").value;
     getMovies(API_POPULAR_MOVIES + "&region="+ country);}
 
 )
 
 watchSeries.addEventListener('click',(e)=> {
+
+    watchSeries.classList.add("dourado");
+    discoverMovies.classList.remove("dourado");
+    watchFilmes.classList.remove("dourado");
+    
     var country = document.getElementById("selectCountry").value;
-    filme = false;
     getMovies(API_POPULAR_SERIES + "&region="+ country);
     console.log(API_POPULAR_SERIES + "&region="+ country)}
     
     )
 
     discoverMovies.addEventListener('click',(e)=> {
+
+        discoverMovies.classList.add("dourado");
+        watchFilmes.classList.remove("dourado");
+        watchSeries.classList.remove("dourado");
+
         var country = document.getElementById("selectCountry").value;
-        filme = true;
         getMovies(API_DISCOVER_MOVIES + "&region="+ country);        
     }) 
