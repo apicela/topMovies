@@ -53,15 +53,17 @@ header .pesquisa{
 .filter{
     display: flex;
     justify-content: center;
+
     margin: 15px;
 }
+
 
 .filter select {
     align-items: center;
     padding: 3px 10px;
     background-color: rgb(253, 212, 90);
     color:black;
-    font-size: 20px;
+    font-size: 25px;
     border: 1.3px solid var(--second-color);
     border-radius: 20px;
     margin-right: 25px;
@@ -77,6 +79,9 @@ header .pesquisa{
 
 }
 
+.noFilter{
+    opacity: 0%;
+}
 .watch{
     display: flex;
     justify-content: center;

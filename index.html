@@ -57,15 +57,15 @@
   
     <header>
         
-        <div class="leftOptions">
+    <div class="leftOptions" >
          
         <div class="media">
-        <div class="watch">
-            <h1 id ="filmes" >FILMES</h1>
-            <h1 id = "series" >SERIES</h1>
-            <h1 id = "releases" >NOVIDADES</h1>
-        </div> 
-    </div>
+            <div class="watch" id="watchOption">
+                <h1 id ="filmes" class="dourado" value="movie/">FILMES</h1>
+                <h1 id = "series" value="tv/" >SERIES</h1>
+                <h1 id = "releases" >NOVIDADES</h1>
+            </div> 
+         </div>
     </div>
     
    <!-- <h1 class="topMovies"><span style="color:var(--blue-color);">Top</span><span style=" color: white;">Movies</span></h1> -->
@@ -75,7 +75,7 @@
         </form>
     </header>
 
-        <div class="filter">
+        <div class="filter" id="filter">
             <select id = "selectCountry">
                 <option value="" selected>🌎</option>
                 <option  value="BR">🇧🇷</option>
@@ -89,27 +89,27 @@
                 <option value="RU">🇷🇺</option>
                 <option value="CA">🇨🇦</option>
          </select>
+
          <div class="orderDiv">
             <select id = "orderBy">
-                <option value="" selected>Ordenar por</option>
-                <option>Popularidade(maior)</option>
-                <option>Avaliação(melhor)</option>
+                <option value="popular?&" selected>Popularidade(maior)</option>
+                <option value="top_rated?&">Avaliação(melhor)</option>
             </select>  
-        </div>
+        </div> 
+
             <select id = "provider">
-                <option value="" selected>Assistir na</option>
-                <option>Qualquer</option>
-                <option>Netflix</option>
-                <option>Amazon Prime</option>
-                <option>Disney+</option>
-                <option>Star+</option>
-                <option>HBO Max</option>
+                <option value="" selected>Qualquer</option>
+                <option value="8">Netflix</option>
+                <option value="9">Amazon Prime</option>
+                <option value="337">Disney+</option>
+                <option value="619">Star+</option>
+                <option value="384">HBO Max</option>
             </select>  
 
             <div class="generDiv">
-                <select id = "generSelector">
-                        <option value="" selected>Gênero</option>
-                        <option>Todos</option>
+                <select id = "genreSelector">
+                        <option value="" selected>Todos</option>
+                        
                 </select>  
                 </div>
         </div>
