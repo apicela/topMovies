@@ -1,5 +1,5 @@
 /* 
-preciso add region= para filtrar por país, entretanto, escolhendo provedor, há bug.
+provider name para series
 */
 
 
@@ -33,16 +33,24 @@ getList(GENRE_LIST);
 
 function getAPI(){
     var country = document.getElementById("selectCountry").value;
+    if(country.length==0){
+        country="br";
+    }
     var orderBy = document.getElementById("orderBy").value;
     var provider = document.getElementById("provider").value;
+    if(provider==9){
+        country="us";
+    }
     var genre = document.getElementById("genreSelector").value;
     var type = typeWatch();
     console.log(BASE_URL + type+ orderBy+ API_KEY + LANGUAGE + "&page=1" +  
     "&vote_count.gte=100"+  "&with_watch_providers=" + provider
-    +"&watch_region=" + country);    
+    +"&watch_region=" + country);  
+    console.log(country);
     return BASE_URL + type+ orderBy+ API_KEY + LANGUAGE + "&page=1" +  
      "&vote_count.gte=100"+ "&with_watch_providers=" + provider
-     +"&watch_region=" + country;      
+     +"&watch_region=" + country;  
+
 }
 
 var countryBox = document.getElementById("selectCountry")
@@ -56,7 +64,7 @@ var orderByBox = document.getElementById("orderBy")
  }
 
  var orderByBox = document.getElementById("provider")
- .onchange = () => {
+ .onchange = () => { 
      getMovies(getAPI());
   }
 
@@ -82,7 +90,8 @@ function getList(url){
 
 function genreList(data){
     genreSelector.innerHTML = `
-     <option value="" selected>Todos</option>  `
+     <option value="" selected>Gênero</option>
+     <option value="" >Todos</option>   `
     data.forEach(genre => {
         
         const{name} = genre;
