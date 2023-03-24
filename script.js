@@ -22,6 +22,7 @@ const genreSelector = document.getElementById('genreSelector');
 const filter = document.getElementById('filter');
 var type="movie/";
 
+console.log(GENRE_LIST);
 console.log(API_POPULAR_MOVIES);
 console.log(API_DISCOVER_MOVIES);
 console.log(GENRE_LIST);
@@ -38,17 +39,17 @@ function getAPI(){
     }
     var orderBy = document.getElementById("orderBy").value;
     var provider = document.getElementById("provider").value;
-    if(provider==9){
-        country="us";
+    if(provider==1024){
+        country="US";
     }
     var genre = document.getElementById("genreSelector").value;
     var type = typeWatch();
     console.log(BASE_URL + type+ orderBy+ API_KEY + LANGUAGE + "&page=1" +  
-    "&vote_count.gte=100"+  "&with_watch_providers=" + provider
-    +"&watch_region=" + country);  
+    "&vote_count.gte=100" + "&with_genres="+ genre + provider
+    +"&watch_region=" + country );  
     console.log(country);
     return BASE_URL + type+ orderBy+ API_KEY + LANGUAGE + "&page=1" +  
-     "&vote_count.gte=100"+ "&with_watch_providers=" + provider
+     "&vote_count.gte=100" + "&with_genres="+ genre + provider
      +"&watch_region=" + country;  
 
 }
@@ -94,8 +95,9 @@ function genreList(data){
      <option value="" >Todos</option>   `
     data.forEach(genre => {
         
-        const{name} = genre;
+        const{name,id} = genre;
         const divGenre =  document.createElement('option');
+        divGenre.value=id;
         divGenre.innerHTML = `
         ${name}
         `
