@@ -1,8 +1,9 @@
 const API_KEY = "api_key=4afe9ae58f077a64af133da919425eca";
 const BASE_URL = "https://api.themoviedb.org/3/";
 const LANGUAGE = "&language=pt-BR";
-const API_POPULAR_MOVIES = BASE_URL +  'movie/popular?&' + API_KEY + LANGUAGE + "&page=1" + "&vote_count.gte=70";
-const API_POPULAR_SERIES = BASE_URL  + 'tv/popular?&' + API_KEY + LANGUAGE + "&page=1" + "&vote_count.gte=70";
+var page = 1;
+const API_POPULAR_MOVIES = BASE_URL +  'movie/popular?&' + API_KEY + LANGUAGE  + "&vote_count.gte=70";
+const API_POPULAR_SERIES = BASE_URL  + 'tv/popular?&' + API_KEY + LANGUAGE + "&vote_count.gte=70";
 const API_DISCOVER_MOVIES = BASE_URL + "discover/movie?"+ API_KEY+ LANGUAGE+"&sort_by=release_date.desc" + "&vote_count.gte=100"; 
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 const searchBar = document.getElementById('form');
@@ -18,14 +19,12 @@ const genreSelector = document.getElementById('genreSelector');
 const filter = document.getElementById('filter');
 var type="movie/";
 
-console.log(GENRE_TV);
-console.log(API_POPULAR_MOVIES);
-console.log(API_DISCOVER_MOVIES);
-console.log(GENRE_MOVIES);
 
 getMovies(API_POPULAR_MOVIES);
 
 getList(GENRE_MOVIES);
+
+
 
 
 function getAPI(){
@@ -35,39 +34,43 @@ function getAPI(){
     }
     var orderBy = document.getElementById("orderBy").value;
     var provider = document.getElementById("provider").value;
-    console.log(provider);
     if(provider!=""){
         country="US";
     }
     var genre = document.getElementById("genreSelector").value;
     var type = typeWatch();
-    console.log(BASE_URL + type+ orderBy+ API_KEY + LANGUAGE + "&page=1" +  
-    "&vote_count.gte=100" + "&with_genres="+ genre + provider
-    +"&watch_region=" + country );  
-    console.log(country);
+
     return BASE_URL + type+ orderBy+ API_KEY + LANGUAGE + "&page=1" +  
      "&vote_count.gte=100" + "&with_genres="+ genre + provider
-     +"&watch_region=" + country;  
+     +"&watch_region=" + country + "&page=" + page;  
 
 }
 
 var countryBox = document.getElementById("selectCountry")
 .onchange = () => {
+    main.innerHTML = "";
+    page =1;
     getMovies(getAPI());
 }
 
 var orderByBox = document.getElementById("orderBy")
 .onchange = () => {
+    main.innerHTML = "";
+    page =1;
     getMovies(getAPI());
  }
 
  var orderByBox = document.getElementById("provider")
  .onchange = () => { 
+    main.innerHTML = "";
+    page =1;
      getMovies(getAPI());
   }
 
   var orderByBox = document.getElementById("genreSelector")
 .onchange = () => {
+    main.innerHTML = "";
+    page =1;
     getMovies(getAPI());
  }
 
@@ -104,29 +107,50 @@ function genreList(data){
 }
 
 function showMovies(data){
-    main.innerHTML = "";
-    data.forEach(movie => {
-    
-    const{title,name,poster_path,vote_average,overview} = movie;
-    const movieElement = document.createElement('div');
-    movieElement.classList.add('movie');
-    movieElement.innerHTML =  `
-    <img src="${IMG_URL+poster_path}">
-        
-            <div class="movieInfo">
-                <h2 class="titleMovie">${title||name}</h2>
-                <span class="${getColor(vote_average)}">${vote_average}</span>
-            </div>
+    data.forEach(movie => 
+    { 
+        const{title,name,poster_path,vote_average,overview} = movie;
+        const movieElement = document.createElement('div');
+        movieElement.classList.add('movie');
+        movieElement.innerHTML =  `
+        <img src="${IMG_URL+poster_path}">
+            
+                <div class="movieInfo">
+                    <h2 class="titleMovie">${title||name}</h2>
+                    <span class="${getColor(vote_average)}">${vote_average}</span>
+                </div>
 
-            <div class="overview">
-                <h2>RESUMO </h2>
-                ${overview}
-            </div>
+                <div class="overview">
+                    <h2>RESUMO </h2>
+                    ${overview}
+                </div>
 
-    `  
-    main.appendChild(movieElement);
+        `  
+        main.appendChild(movieElement);
     })
+    
+   // pageDiv();
 }
+
+function detectarFimDoScroll() {
+    function onScroll() {
+       if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
+          // chegou ao fim do scroll
+          console.log('Fim do scroll detectado!');
+        page++;  
+        getMovies(getAPI());  
+        console.log(page)
+  
+        /*
+        window.removeEventListener('scroll', onScroll);
+        window.addEventListener('scroll', onScroll); */
+       }
+       
+    }
+    window.addEventListener('scroll', onScroll);
+ }
+window.addEventListener('load', detectarFimDoScroll);
+
 
 function getColor(vote){
     if(vote>=8){return 'green';}

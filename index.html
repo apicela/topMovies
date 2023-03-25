@@ -17,8 +17,18 @@
         display: block;
         padding: 0px;
         margin: 0px;
-        
+                
+
                 }
+
+                .filter select {
+                padding: 0px 0px;
+                background-color: rgb(253, 212, 90);
+                color:black;
+                font-size: 18px;
+                border: 1.3px solid var(--second-color);
+                border-radius: 20px;
+            } 
                 .watchFont{
                     margin-right: 20px;
                     padding: 5px;
@@ -38,9 +48,6 @@
                     margin-left: -20px;
 
                 }
-                #selectCountry{
-                    margin-left: 0px;
-                }
                 .form{
                     margin-top:30px;
                     padding: 20px 7px;
@@ -54,7 +61,7 @@
     </head>
 
 <body>
-  
+  <div id=container> </div>
     <header>
         
     <div class="leftOptions" >
@@ -115,16 +122,17 @@
                 </div>
         </div>
  
-    <div id="main">
+        <div id="main">
 
-    </div>
+        </div>
 
+        <div id="pages">
 
+        </div>
 
-   
-    
-    
     <script src="script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 
 </body>
 

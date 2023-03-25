@@ -9,6 +9,11 @@
     --dourado: rgb(253, 212, 90);
 }
 
+.pageDiv{
+    background-color: red;
+    height: 30px;
+}
+
 ::placeholder{
     color: rgb(241, 241, 241);
     text-indent: 18px;
@@ -91,7 +96,6 @@ header .pesquisa{
 
 .watch h1{
    font-style: bold;
-
     padding: 0px 13px; 
     color:white;
 }
