@@ -1,19 +1,15 @@
-/* 
-provider name para series
-*/
-
-
 const API_KEY = "api_key=4afe9ae58f077a64af133da919425eca";
 const BASE_URL = "https://api.themoviedb.org/3/";
 const LANGUAGE = "&language=pt-BR";
-const API_POPULAR_MOVIES = BASE_URL +  'movie/popular?&' + API_KEY + LANGUAGE + "&page=1" + "&vote_count.gte=100";
-const API_POPULAR_SERIES = BASE_URL  + 'tv/popular?&' + API_KEY + LANGUAGE + "&page=1" + "&vote_count.gte=100";
+const API_POPULAR_MOVIES = BASE_URL +  'movie/popular?&' + API_KEY + LANGUAGE + "&page=1" + "&vote_count.gte=70";
+const API_POPULAR_SERIES = BASE_URL  + 'tv/popular?&' + API_KEY + LANGUAGE + "&page=1" + "&vote_count.gte=70";
 const API_DISCOVER_MOVIES = BASE_URL + "discover/movie?"+ API_KEY+ LANGUAGE+"&sort_by=release_date.desc" + "&vote_count.gte=100"; 
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 const searchBar = document.getElementById('form');
 const search = document.getElementById('pesquisa');
 const SEARCH_URL = BASE_URL + 'search/multi?' + API_KEY; 
-const GENRE_LIST = BASE_URL + "genre/movie/list?"+ API_KEY + LANGUAGE;
+const GENRE_MOVIES = BASE_URL + "genre/movie/"+"list?"+ API_KEY + LANGUAGE;
+const GENRE_TV = BASE_URL + "genre/tv/"+"list?"+ API_KEY + LANGUAGE;
 const main = document.getElementById('main');
 const watchFilmes = document.getElementById('filmes');
 const watchSeries = document.getElementById('series');
@@ -22,14 +18,14 @@ const genreSelector = document.getElementById('genreSelector');
 const filter = document.getElementById('filter');
 var type="movie/";
 
-console.log(GENRE_LIST);
+console.log(GENRE_TV);
 console.log(API_POPULAR_MOVIES);
 console.log(API_DISCOVER_MOVIES);
-console.log(GENRE_LIST);
+console.log(GENRE_MOVIES);
 
 getMovies(API_POPULAR_MOVIES);
 
-getList(GENRE_LIST);
+getList(GENRE_MOVIES);
 
 
 function getAPI(){
@@ -39,7 +35,8 @@ function getAPI(){
     }
     var orderBy = document.getElementById("orderBy").value;
     var provider = document.getElementById("provider").value;
-    if(provider==1024){
+    console.log(provider);
+    if(provider!=""){
         country="US";
     }
     var genre = document.getElementById("genreSelector").value;
@@ -90,6 +87,7 @@ function getList(url){
 }
 
 function genreList(data){
+    type = typeWatch();
     genreSelector.innerHTML = `
      <option value="" selected>Gênero</option>
      <option value="" >Todos</option>   `
@@ -151,6 +149,7 @@ searchBar.addEventListener('submit',(e) => {
 
 watchFilmes.addEventListener('click',(e)=> {
     type = 'movie/';
+    getList(GENRE_MOVIES);
     filter.classList.remove("noFilter");
 
     watchFilmes.classList.add("dourado");
@@ -162,6 +161,7 @@ var country = document.getElementById("selectCountry").value;
 )
 
 watchSeries.addEventListener('click',(e)=> {
+    getList(GENRE_TV);
       filter.classList.remove("noFilter");
     type = 'tv/';
     watchSeries.classList.add("dourado");
@@ -178,7 +178,6 @@ watchSeries.addEventListener('click',(e)=> {
         discoverMovies.classList.add("dourado");
         watchFilmes.classList.remove("dourado");
         watchSeries.classList.remove("dourado");
-
         var country = document.getElementById("selectCountry").value;
         getMovies(API_DISCOVER_MOVIES + "&region="+ country);        
     }) 
