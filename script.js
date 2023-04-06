@@ -21,11 +21,7 @@ var type="movie/";
 
 
 getMovies(API_POPULAR_MOVIES);
-
 getList(GENRE_MOVIES);
-
-
-
 
 function getAPI(){
     var country = document.getElementById("selectCountry").value;
@@ -39,7 +35,6 @@ function getAPI(){
     }
     var genre = document.getElementById("genreSelector").value;
     var type = typeWatch();
-
     return BASE_URL + type+ orderBy+ API_KEY + LANGUAGE + "&page=1" +  
      "&vote_count.gte=100" + "&with_genres="+ genre + provider
      +"&watch_region=" + country + "&page=" + page;  
@@ -48,28 +43,24 @@ function getAPI(){
 
 var countryBox = document.getElementById("selectCountry")
 .onchange = () => {
-    main.innerHTML = "";
     page =1;
     getMovies(getAPI());
 }
 
 var orderByBox = document.getElementById("orderBy")
 .onchange = () => {
-    main.innerHTML = "";
     page =1;
     getMovies(getAPI());
  }
 
  var orderByBox = document.getElementById("provider")
  .onchange = () => { 
-    main.innerHTML = "";
     page =1;
      getMovies(getAPI());
   }
 
   var orderByBox = document.getElementById("genreSelector")
 .onchange = () => {
-    main.innerHTML = "";
     page =1;
     getMovies(getAPI());
  }
@@ -79,6 +70,7 @@ function typeWatch(){
 }
 
 function getMovies(url){ 
+    main.innerHTML = "";
     fetch(url).then(res => res.json()).then(data => 
         {   console.log(data.results);
             showMovies(data.results); } )
@@ -95,7 +87,6 @@ function genreList(data){
      <option value="" selected>Gênero</option>
      <option value="" >Todos</option>   `
     data.forEach(genre => {
-        
         const{name,id} = genre;
         const divGenre =  document.createElement('option');
         divGenre.value=id;
@@ -119,33 +110,23 @@ function showMovies(data){
                     <h2 class="titleMovie">${title||name}</h2>
                     <span class="${getColor(vote_average)}">${vote_average}</span>
                 </div>
-
                 <div class="overview">
                     <h2>RESUMO </h2>
                     ${overview}
                 </div>
-
         `  
         main.appendChild(movieElement);
     })
-    
-   // pageDiv();
 }
 
 function detectarFimDoScroll() {
     function onScroll() {
        if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
           // chegou ao fim do scroll
-          console.log('Fim do scroll detectado!');
         page++;  
         getMovies(getAPI());  
         console.log(page)
-  
-        /*
-        window.removeEventListener('scroll', onScroll);
-        window.addEventListener('scroll', onScroll); */
        }
-       
     }
     window.addEventListener('scroll', onScroll);
  }
@@ -166,12 +147,13 @@ searchBar.addEventListener('submit',(e) => {
     if(keyword){
         getMovies(SEARCH_URL + '&query=' + keyword + LANGUAGE);
     } else {
-        getMovies(API_POPULAR_MOVIES);
+        getMovies(getAPI());
     }
 })
 
 
 watchFilmes.addEventListener('click',(e)=> {
+    main.innerHTML = "";
     type = 'movie/';
     getList(GENRE_MOVIES);
     filter.classList.remove("noFilter");
@@ -179,29 +161,28 @@ watchFilmes.addEventListener('click',(e)=> {
     watchFilmes.classList.add("dourado");
     discoverMovies.classList.remove("dourado");
     watchSeries.classList.remove("dourado");
-var country = document.getElementById("selectCountry").value;
-    getMovies(BASE_URL +  'movie/popular?&' + API_KEY + LANGUAGE + "&page=1" + "&vote_count.gte=100" + "&region="+ country);}
+    getMovies(getAPI());}
 
 )
 
 watchSeries.addEventListener('click',(e)=> {
+    main.innerHTML = "";
     getList(GENRE_TV);
       filter.classList.remove("noFilter");
     type = 'tv/';
     watchSeries.classList.add("dourado");
     discoverMovies.classList.remove("dourado");
     watchFilmes.classList.remove("dourado");
-    var country = document.getElementById("selectCountry").value;
-    getMovies(API_POPULAR_SERIES + "&region="+ country);
+    getMovies(getAPI());
     console.log(API_POPULAR_SERIES + "&region="+ country)}
     
     )
 
     discoverMovies.addEventListener('click',(e)=> {
+        main.innerHTML = "";
         filter.classList.add("noFilter");
         discoverMovies.classList.add("dourado");
         watchFilmes.classList.remove("dourado");
         watchSeries.classList.remove("dourado");
-        var country = document.getElementById("selectCountry").value;
-        getMovies(API_DISCOVER_MOVIES + "&region="+ country);        
+        getMovies(getAPI());        
     }) 
