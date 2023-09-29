@@ -7,3 +7,5 @@ Pode ser acesso em: https://apicela.github.io/topMovies/<br>
 Atualizações futuras: Adicionar carrossel de vídeos, com trailer, informações acerca do filme, etc.<br>
 
 O acesso a API consumida pode ser consultada em: https://developers.themoviedb.org/3
+
+![image](https://github.com/apicela/topMovies/assets/105384228/0264a551-7cf6-4b61-a32a-43f422c12c82)
